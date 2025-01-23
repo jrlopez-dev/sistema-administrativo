@@ -2,6 +2,10 @@
 
 Este documento proporciona una visión general de la configuración de `docker-compose.yml` para la aplicación de prueba tecnica, que incluye un backend, frontend, base de datos PostgreSQL y pgAdmin.
 El Backend esta en Spring-Boot y el FrontEnd esta en React. Al final encontraran el comando para ejecutar la solucion
+
+El Bakend lo pueden ejecutar en http://localhost:8086/documentacion.html para ver los endpoint con la interfaz de Swagger
+
+El FrontEnd lo pueden visualidar en http://localhost:80
 ## Servicios
 
 ### 1. **client-db** (Base de Datos PostgreSQL)
