@@ -1,0 +1,36 @@
+.git
+.gitignore
+Dockerfile
+.dockerignore
+README.md
+
+
+# For spring
+
+# Excluir archivos y directorios no necesarios
+.git
+.gitignore
+README.md
+Dockerfile
+.dockerignore
+
+# Para Spring
+.idea/
+*.iml
+*.iws
+target/
+.sonar/
+.sonarlint/
+
+# Ignorar archivos de configuración del IDE y herramientas de construcción
+.vscode/
+.classpath
+.project
+.settings/
+
+# Incluir solo archivos necesarios
+!src/
+!pom.xml
+!mvnw
+!mvnw.cmd
+!.mvn/

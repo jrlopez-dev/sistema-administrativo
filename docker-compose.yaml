@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  client-db:
+    container_name: ${POSTGRES_HOST}
+    build:
+      context: ./clients-db/docker
+      dockerfile: Dockerfile
+
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - clients-net
+
+  client-backend:
+    container_name: ${API_HOST}
+    build:
+      context: ./clients-app/backend
+      dockerfile: Dockerfile
+
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}   
+    ports:
+      - "8086:8080" 
+    depends_on:
+      - client-db
+    networks:
+      - clients-net    
+    
+  client-frontend:
+    container_name: ${FRONTEND_HOST}
+    build:
+      context: ./clients-app/frontend
+      dockerfile: Dockerfile2
+    ports:
+      - "80:80"   
+    depends_on:
+      - client-backend
+    networks:
+      - clients-net  
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "8080:80" 
+    networks:
+      - clients-net
+
+networks:
+  clients-net:
+    driver: bridge
